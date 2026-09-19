@@ -1,0 +1,1070 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BeTruthfull Mobile Screens</title>
+</head>
+<body>
+<div id="betruthfull-app">
+  <style>
+    #betruthfull-app {
+      --bg: #f5f7f8;
+      --panel: #ffffff;
+      --panel-2: #eef3f2;
+      --text: #17201d;
+      --muted: #65736f;
+      --line: #dbe4e1;
+      --brand: #2f7d68;
+      --brand-soft: #dff1eb;
+      --blue: #3976d8;
+      --pink: #dc5e89;
+      --yellow: #f5c75b;
+      --danger: #c83242;
+      --shadow: 0 18px 50px rgba(23, 32, 29, .14);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      padding: 28px;
+      box-sizing: border-box;
+    }
+
+    #betruthfull-app * {
+      box-sizing: border-box;
+    }
+
+    .prototype-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 300px minmax(320px, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .controls {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(23, 32, 29, .08);
+      position: sticky;
+      top: 20px;
+    }
+
+    .controls h1 {
+      font-size: 22px;
+      line-height: 1.18;
+      margin: 0 0 8px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .controls p {
+      color: var(--muted);
+      margin: 0 0 18px;
+      line-height: 1.45;
+      font-size: 14px;
+    }
+
+    .control-label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin: 18px 0 8px;
+    }
+
+    .platform-tabs,
+    .screen-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .platform-tabs {
+      grid-template-columns: 1fr 1fr;
+      background: var(--panel-2);
+      border-radius: 8px;
+      padding: 4px;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .platform-button,
+    .screen-button,
+    .small-action,
+    .primary-action,
+    .danger-action,
+    .icon-action,
+    .nav-item,
+    .chip,
+    .quantity-button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    .platform-button {
+      height: 38px;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .platform-button.active {
+      background: var(--panel);
+      color: var(--text);
+      box-shadow: 0 2px 8px rgba(23, 32, 29, .08);
+    }
+
+    .screen-list {
+      grid-template-columns: 1fr;
+      max-height: 560px;
+      overflow: auto;
+      padding-right: 2px;
+    }
+
+    .screen-button {
+      background: transparent;
+      border-radius: 8px;
+      padding: 11px 12px;
+      color: var(--text);
+      text-align: left;
+      font-weight: 650;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .screen-button.active {
+      background: var(--brand-soft);
+      color: var(--brand);
+    }
+
+    .screen-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 99px;
+      background: currentColor;
+      opacity: .8;
+      flex: 0 0 auto;
+    }
+
+    .preview-zone {
+      display: grid;
+      place-items: start center;
+      min-height: 780px;
+    }
+
+    .phone {
+      width: 390px;
+      min-height: 812px;
+      background: var(--panel);
+      color: var(--text);
+      border: 10px solid #111513;
+      border-radius: 42px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    .phone.android {
+      border-radius: 26px;
+      border-width: 8px;
+    }
+
+    .status-bar {
+      height: 34px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 22px;
+      font-size: 12px;
+      font-weight: 700;
+      background: var(--panel);
+      color: var(--text);
+    }
+
+    .android .status-bar {
+      height: 30px;
+      padding: 0 18px;
+      border-radius: 0;
+    }
+
+    .status-icons {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .signal,
+    .wifi,
+    .battery {
+      display: inline-block;
+      background: currentColor;
+      opacity: .85;
+    }
+
+    .signal {
+      width: 14px;
+      height: 10px;
+      clip-path: polygon(0 100%, 25% 70%, 25% 100%, 45% 48%, 45% 100%, 65% 28%, 65% 100%, 100% 0, 100% 100%);
+    }
+
+    .wifi {
+      width: 13px;
+      height: 10px;
+      clip-path: polygon(50% 100%, 20% 58%, 34% 48%, 50% 70%, 66% 48%, 80% 58%);
+    }
+
+    .battery {
+      width: 19px;
+      height: 9px;
+      border-radius: 2px;
+    }
+
+    .top-app-bar {
+      padding: 10px 18px 14px;
+      background: var(--panel);
+      border-bottom: 1px solid transparent;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .android .top-app-bar {
+      border-bottom-color: var(--line);
+      padding: 12px 16px;
+    }
+
+    .app-title {
+      min-width: 0;
+    }
+
+    .app-title strong {
+      display: block;
+      font-size: 25px;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .android .app-title strong {
+      font-size: 20px;
+    }
+
+    .app-title span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .icon-action {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--panel-2);
+      color: var(--text);
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .android .icon-action {
+      border-radius: 8px;
+    }
+
+    .content {
+      min-height: 0;
+      overflow: auto;
+      padding: 0 18px 18px;
+      background: linear-gradient(180deg, var(--panel) 0%, var(--bg) 100%);
+    }
+
+    .section {
+      display: none;
+      padding-top: 4px;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .hero-panel,
+    .feature-card,
+    .post-card,
+    .product-card,
+    .message-card,
+    .room-card,
+    .support-card,
+    .workshop-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .hero-panel {
+      padding: 18px;
+      margin: 8px 0 14px;
+      background: var(--brand-soft);
+      border-color: transparent;
+    }
+
+    .hero-panel h2 {
+      margin: 0 0 7px;
+      font-size: 24px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .hero-panel p,
+    .feature-card p,
+    .post-card p,
+    .room-card p,
+    .support-card p,
+    .workshop-card p,
+    .product-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.42;
+      font-size: 14px;
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    .feature-card {
+      padding: 13px;
+      min-height: 100px;
+    }
+
+    .feature-card strong,
+    .workshop-card strong,
+    .product-card strong,
+    .room-card strong,
+    .support-card strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .screen-heading {
+      font-size: 18px;
+      margin: 16px 0 10px;
+      letter-spacing: 0;
+    }
+
+    .mood-row,
+    .chip-row,
+    .action-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .chip {
+      min-height: 34px;
+      border-radius: 99px;
+      padding: 8px 12px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      color: var(--text);
+      font-weight: 650;
+      font-size: 13px;
+    }
+
+    .chip.active {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: #fff;
+    }
+
+    .android .chip {
+      border-radius: 8px;
+    }
+
+    .primary-action,
+    .danger-action,
+    .small-action {
+      border-radius: 8px;
+      min-height: 42px;
+      padding: 10px 14px;
+      font-weight: 750;
+    }
+
+    .primary-action {
+      background: var(--brand);
+      color: #fff;
+    }
+
+    .danger-action {
+      background: var(--danger);
+      color: #fff;
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    .small-action {
+      background: var(--panel-2);
+      color: var(--text);
+    }
+
+    .list {
+      display: grid;
+      gap: 10px;
+      margin: 10px 0 14px;
+    }
+
+    .workshop-card,
+    .product-card,
+    .post-card,
+    .room-card,
+    .support-card,
+    .message-card {
+      padding: 13px;
+    }
+
+    .message-stream {
+      display: grid;
+      gap: 8px;
+      margin: 10px 0;
+    }
+
+    .bubble {
+      max-width: 82%;
+      padding: 10px 12px;
+      border-radius: 18px;
+      background: var(--panel-2);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .bubble.user {
+      justify-self: end;
+      background: var(--brand);
+      color: #fff;
+    }
+
+    .android .bubble {
+      border-radius: 8px;
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .input-row input,
+    .input-row textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      min-height: 42px;
+      padding: 10px 12px;
+      font: inherit;
+      color: var(--text);
+      background: var(--panel);
+    }
+
+    .input-row textarea {
+      min-height: 78px;
+      resize: vertical;
+      grid-column: 1 / -1;
+    }
+
+    .post-header,
+    .product-row,
+    .workshop-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--brand-soft);
+      color: var(--brand);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .android .avatar {
+      border-radius: 8px;
+    }
+
+    .post-person {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+    }
+
+    .post-person strong {
+      display: block;
+      font-size: 14px;
+    }
+
+    .post-person span,
+    .meta {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .post-media {
+      aspect-ratio: 1.35;
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at 24% 22%, rgba(245, 199, 91, .9), transparent 24%),
+        radial-gradient(circle at 78% 26%, rgba(57, 118, 216, .34), transparent 28%),
+        linear-gradient(135deg, #dff1eb, #f8ecef);
+      margin: 10px 0;
+    }
+
+    .metrics {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .product-thumb {
+      width: 62px;
+      height: 62px;
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at 30% 28%, #f5c75b 0 19%, transparent 20%),
+        radial-gradient(circle at 70% 70%, #dc5e89 0 22%, transparent 23%),
+        var(--brand-soft);
+      flex: 0 0 auto;
+    }
+
+    .quantity {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-weight: 700;
+    }
+
+    .quantity-button {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--panel-2);
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .android .quantity-button {
+      border-radius: 8px;
+    }
+
+    .emergency-panel {
+      background: #fff4f5;
+      border: 1px solid #f2c7ce;
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 10px;
+    }
+
+    .emergency-panel h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+    }
+
+    .emergency-number {
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: 0;
+      color: var(--danger);
+      margin: 12px 0;
+    }
+
+    .bottom-nav {
+      background: rgba(255, 255, 255, .96);
+      border-top: 1px solid var(--line);
+      padding: 8px 10px 22px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 4px;
+    }
+
+    .android .bottom-nav {
+      padding: 6px 6px 8px;
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .nav-item {
+      background: transparent;
+      color: var(--muted);
+      border-radius: 8px;
+      padding: 7px 2px;
+      display: grid;
+      gap: 2px;
+      justify-items: center;
+      font-size: 10px;
+      font-weight: 750;
+      min-width: 0;
+    }
+
+    .nav-item.active {
+      color: var(--brand);
+      background: var(--brand-soft);
+    }
+
+    .nav-icon {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .android .nav-item {
+      border-radius: 8px;
+      font-size: 11px;
+    }
+
+    .android .nav-icon {
+      font-size: 17px;
+    }
+
+    .toast {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 84px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      background: #17201d;
+      color: #fff;
+      font-size: 13px;
+      line-height: 1.35;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: .2s ease;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 850px) {
+      #betruthfull-app {
+        padding: 16px;
+      }
+
+      .prototype-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .controls {
+        position: static;
+      }
+
+      .screen-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-height: none;
+      }
+    }
+
+    @media (max-width: 460px) {
+      #betruthfull-app {
+        padding: 10px;
+      }
+
+      .phone {
+        width: 100%;
+        min-height: 760px;
+        border-width: 6px;
+        border-radius: 30px;
+      }
+
+      .screen-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <div class="prototype-shell">
+    <aside class="controls" aria-label="Prototype controls">
+      <h1>BeTruthfull screens</h1>
+      <p>Basic functional mobile flow with calm Apple styling and a cleaner Android variation.</p>
+
+      <span class="control-label">Platform style</span>
+      <div class="platform-tabs" role="group" aria-label="Platform style">
+        <button class="platform-button active" type="button" data-platform="ios">Apple</button>
+        <button class="platform-button" type="button" data-platform="android">Android</button>
+      </div>
+
+      <span class="control-label">Screens</span>
+      <div class="screen-list" aria-label="App screens">
+        <button class="screen-button active" type="button" data-screen="home"><span class="screen-dot"></span>Home</button>
+        <button class="screen-button" type="button" data-screen="relax"><span class="screen-dot"></span>Relax</button>
+        <button class="screen-button" type="button" data-screen="chat"><span class="screen-dot"></span>Chat</button>
+        <button class="screen-button" type="button" data-screen="ideas"><span class="screen-dot"></span>Ideas</button>
+        <button class="screen-button" type="button" data-screen="mental"><span class="screen-dot"></span>Mental health</button>
+        <button class="screen-button" type="button" data-screen="workshops"><span class="screen-dot"></span>Workshops</button>
+        <button class="screen-button" type="button" data-screen="fun"><span class="screen-dot"></span>Fun</button>
+        <button class="screen-button" type="button" data-screen="shop"><span class="screen-dot"></span>Shop</button>
+        <button class="screen-button" type="button" data-screen="rooms"><span class="screen-dot"></span>Rooms</button>
+        <button class="screen-button" type="button" data-screen="social"><span class="screen-dot"></span>Social</button>
+        <button class="screen-button" type="button" data-screen="emergency"><span class="screen-dot"></span>Emergency</button>
+      </div>
+    </aside>
+
+    <main class="preview-zone">
+      <div class="phone ios" id="phone">
+        <div class="status-bar">
+          <span>9:41</span>
+          <span class="status-icons"><span class="signal"></span><span class="wifi"></span><span class="battery"></span></span>
+        </div>
+
+        <header class="top-app-bar">
+          <div class="app-title">
+            <strong id="screenTitle">Today</strong>
+            <span id="screenSubtitle">A softer place to check in</span>
+          </div>
+          <button class="icon-action" type="button" data-go="emergency" aria-label="Emergency support">SOS</button>
+        </header>
+
+        <div class="content" id="screenContent">
+          <section class="section active" data-section="home">
+            <div class="hero-panel">
+              <h2>How are you feeling?</h2>
+              <p>Check in, find support, and move toward something steady.</p>
+            </div>
+            <div class="mood-row" aria-label="Mood check-in">
+              <button class="chip" type="button">Calm</button>
+              <button class="chip active" type="button">Okay</button>
+              <button class="chip" type="button">Anxious</button>
+              <button class="chip" type="button">Lonely</button>
+            </div>
+            <h3 class="screen-heading">Quick access</h3>
+            <div class="quick-grid">
+              <button class="feature-card screen-button-card" type="button" data-go="chat"><strong>Talk now</strong><p>Open a safe chat space.</p></button>
+              <button class="feature-card screen-button-card" type="button" data-go="relax"><strong>Relax tools</strong><p>Breathing and grounding.</p></button>
+              <button class="feature-card screen-button-card" type="button" data-go="workshops"><strong>Workshops</strong><p>Join live support events.</p></button>
+              <button class="feature-card screen-button-card" type="button" data-go="shop"><strong>Fidget shop</strong><p>Simple sensory products.</p></button>
+            </div>
+          </section>
+
+          <section class="section" data-section="relax">
+            <div class="hero-panel">
+              <h2>Relax room</h2>
+              <p>A quiet space for grounding, breathing, and soft reset moments.</p>
+            </div>
+            <div class="list">
+              <div class="support-card"><strong>Box breathing</strong><p>Inhale 4, hold 4, exhale 4, hold 4.</p></div>
+              <div class="support-card"><strong>5-4-3-2-1 grounding</strong><p>Name things you can see, feel, hear, smell, and taste.</p></div>
+              <div class="support-card"><strong>Sound break</strong><p>Choose rain, ocean, white noise, or silence.</p></div>
+            </div>
+            <button class="primary-action" type="button" data-toast="Started a 2 minute breathing reset.">Start reset</button>
+          </section>
+
+          <section class="section" data-section="chat">
+            <div class="hero-panel">
+              <h2>Safe chat</h2>
+              <p>Talk with a supporter or enter a calmer community chat.</p>
+            </div>
+            <div class="message-stream" id="chatStream">
+              <div class="bubble">Hi, I am here with you. What feels heavy right now?</div>
+              <div class="bubble user">I just need someone to listen.</div>
+              <div class="bubble">That makes sense. We can take it one sentence at a time.</div>
+            </div>
+            <div class="input-row">
+              <input id="chatInput" type="text" placeholder="Write a message">
+              <button class="primary-action" type="button" data-send-chat>Send</button>
+            </div>
+          </section>
+
+          <section class="section" data-section="ideas">
+            <div class="hero-panel">
+              <h2>Idea garden</h2>
+              <p>Share thoughts, prompts, poetry, or anything that might help someone else.</p>
+            </div>
+            <div class="input-row">
+              <textarea id="ideaText" placeholder="Share an idea with the community"></textarea>
+              <button class="primary-action" type="button" data-add-idea>Post idea</button>
+            </div>
+            <div class="list" id="ideaList">
+              <div class="post-card"><strong>Today's prompt</strong><p>What is one tiny thing that made today easier?</p></div>
+              <div class="post-card"><strong>Shared idea</strong><p>Keep a comfort playlist for hard evenings.</p></div>
+            </div>
+          </section>
+
+          <section class="section" data-section="mental">
+            <div class="hero-panel">
+              <h2>Mental health</h2>
+              <p>Simple tools, check-ins, and resources for harder moments.</p>
+            </div>
+            <div class="list">
+              <div class="support-card"><strong>Daily check-in</strong><p>Track mood, sleep, stress, and what helped.</p></div>
+              <div class="support-card"><strong>Coping library</strong><p>Short exercises for anxiety, loneliness, anger, and overwhelm.</p></div>
+              <div class="support-card"><strong>Support plan</strong><p>Save trusted contacts and steps for crisis moments.</p></div>
+            </div>
+            <button class="danger-action" type="button" data-go="emergency">I need help now</button>
+          </section>
+
+          <section class="section" data-section="workshops">
+            <div class="hero-panel">
+              <h2>Workshops</h2>
+              <p>Join guided sessions for confidence, creativity, care, and community.</p>
+            </div>
+            <div class="list">
+              <div class="workshop-card">
+                <div class="workshop-row"><strong>Stress reset basics</strong><span class="meta">Today 7 PM</span></div>
+                <p>Learn a practical 20 minute reset routine.</p>
+                <div class="action-row"><button class="small-action" type="button" data-toast="You joined Stress reset basics.">Join</button><button class="small-action" type="button" data-toast="Reminder saved.">Remind me</button></div>
+              </div>
+              <div class="workshop-card">
+                <div class="workshop-row"><strong>Creative journaling</strong><span class="meta">Sat 11 AM</span></div>
+                <p>Use writing prompts to sort feelings without pressure.</p>
+                <div class="action-row"><button class="small-action" type="button" data-toast="You joined Creative journaling.">Join</button><button class="small-action" type="button" data-toast="Reminder saved.">Remind me</button></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" data-section="fun">
+            <div class="hero-panel">
+              <h2>Fun corner</h2>
+              <p>Light activities for moments when you need a gentle distraction.</p>
+            </div>
+            <div class="quick-grid">
+              <button class="feature-card" type="button" data-toast="Opened a doodle challenge."><strong>Doodle</strong><p>Draw your current mood.</p></button>
+              <button class="feature-card" type="button" data-toast="Opened a kindness challenge."><strong>Kindness</strong><p>Send one good message.</p></button>
+              <button class="feature-card" type="button" data-toast="Opened a mini quiz."><strong>Mini quiz</strong><p>Find your calm style.</p></button>
+              <button class="feature-card" type="button" data-toast="Opened positive posts."><strong>Good news</strong><p>Read uplifting posts.</p></button>
+            </div>
+          </section>
+
+          <section class="section" data-section="shop">
+            <div class="hero-panel">
+              <h2>Fidget shop</h2>
+              <p>Simple sensory tools for focus, stress, and grounding.</p>
+            </div>
+            <div class="list">
+              <div class="product-card">
+                <div class="product-row">
+                  <div class="post-person"><div class="product-thumb"></div><div><strong>Calm cube</strong><span class="meta">$12.00</span></div></div>
+                  <div class="quantity"><button class="quantity-button" data-qty="-1" type="button">-</button><span id="cartQty">1</span><button class="quantity-button" data-qty="1" type="button">+</button></div>
+                </div>
+                <p>Pocket-sized fidget toy with soft buttons and clickers.</p>
+              </div>
+              <div class="product-card">
+                <div class="product-row">
+                  <div class="post-person"><div class="product-thumb"></div><div><strong>Texture ring</strong><span class="meta">$8.00</span></div></div>
+                  <button class="small-action" type="button" data-toast="Texture ring added to cart.">Add</button>
+                </div>
+                <p>A quiet tactile ring for grounding.</p>
+              </div>
+            </div>
+            <button class="primary-action" type="button" data-toast="Cart saved for checkout.">Checkout</button>
+          </section>
+
+          <section class="section" data-section="rooms">
+            <div class="hero-panel">
+              <h2>My chat areas</h2>
+              <p>Create private or community rooms for topics you care about.</p>
+            </div>
+            <div class="input-row">
+              <input id="roomName" type="text" placeholder="Room name">
+              <button class="primary-action" type="button" data-create-room>Create</button>
+            </div>
+            <div class="list" id="roomList">
+              <div class="room-card"><strong>After school reset</strong><p>Private room. 6 members.</p></div>
+              <div class="room-card"><strong>Creative thoughts</strong><p>Public room. 124 members.</p></div>
+            </div>
+          </section>
+
+          <section class="section" data-section="social">
+            <div class="hero-panel">
+              <h2>Social page</h2>
+              <p>Photo and idea sharing with comments, likes, and gentle moderation.</p>
+            </div>
+            <div class="post-card">
+              <div class="post-header">
+                <div class="post-person"><div class="avatar">M</div><div><strong>Maya</strong><span>Shared a calm moment</span></div></div>
+                <span class="meta">12m</span>
+              </div>
+              <div class="post-media" aria-label="Abstract calming post image"></div>
+              <p>Made it through a difficult morning by going outside for five minutes.</p>
+              <div class="action-row"><button class="small-action" type="button" data-like>Like</button><button class="small-action" type="button" data-toast="Comment box opened.">Comment</button><button class="small-action" type="button" data-toast="Post shared.">Share</button></div>
+              <div class="metrics" id="likeCount">24 likes</div>
+            </div>
+          </section>
+
+          <section class="section" data-section="emergency">
+            <div class="emergency-panel">
+              <h2>Immediate support</h2>
+              <p>If you might hurt yourself or feel unsafe, use this page to call for help now.</p>
+              <div class="emergency-number">988</div>
+              <button class="danger-action" type="button" data-toast="In a real app, this would start a call to 988.">Call crisis line</button>
+              <button class="small-action" type="button" data-toast="Trusted contact alert prepared." style="width:100%; margin-top:8px;">Alert trusted contact</button>
+            </div>
+            <h3 class="screen-heading">While you wait</h3>
+            <div class="list">
+              <div class="support-card"><strong>Move away from danger</strong><p>Put distance between you and anything you could use to hurt yourself.</p></div>
+              <div class="support-card"><strong>Stay with someone</strong><p>Go to a public space, neighbor, friend, or family member.</p></div>
+              <div class="support-card"><strong>Keep the chat open</strong><p>You do not have to explain everything perfectly.</p></div>
+            </div>
+          </section>
+        </div>
+
+        <nav class="bottom-nav" aria-label="Primary app navigation">
+          <button class="nav-item active" type="button" data-go="home"><span class="nav-icon">H</span><span>Home</span></button>
+          <button class="nav-item" type="button" data-go="chat"><span class="nav-icon">C</span><span>Chat</span></button>
+          <button class="nav-item" type="button" data-go="social"><span class="nav-icon">S</span><span>Social</span></button>
+          <button class="nav-item" type="button" data-go="shop"><span class="nav-icon">$</span><span>Shop</span></button>
+          <button class="nav-item" type="button" data-go="emergency"><span class="nav-icon">!</span><span>Help</span></button>
+        </nav>
+
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (() => {
+      const root = document.getElementById('betruthfull-app');
+      const phone = root.querySelector('#phone');
+      const title = root.querySelector('#screenTitle');
+      const subtitle = root.querySelector('#screenSubtitle');
+      const toast = root.querySelector('#toast');
+      const sections = [...root.querySelectorAll('.section')];
+      const screenButtons = [...root.querySelectorAll('.screen-button[data-screen]')];
+      const navItems = [...root.querySelectorAll('.nav-item')];
+      const copy = {
+        home: ['Today', 'A softer place to check in'],
+        relax: ['Relax', 'Breathing, grounding, and quiet reset tools'],
+        chat: ['Chat', 'Safe conversation when you need company'],
+        ideas: ['Ideas', 'Share helpful thoughts with the community'],
+        mental: ['Mental health', 'Exercises, check-ins, and support plans'],
+        workshops: ['Workshops', 'Live sessions and guided community events'],
+        fun: ['Fun', 'Light activities and positive distractions'],
+        shop: ['Shop', 'Fidget toys and sensory support tools'],
+        rooms: ['Rooms', 'Create your own chatting area'],
+        social: ['Social', 'Post, comment, like, and share'],
+        emergency: ['Emergency', 'Fast access to support when it matters']
+      };
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add('show');
+        window.clearTimeout(showToast.timer);
+        showToast.timer = window.setTimeout(() => toast.classList.remove('show'), 2200);
+      }
+
+      function setScreen(screen) {
+        sections.forEach(section => section.classList.toggle('active', section.dataset.section === screen));
+        screenButtons.forEach(button => button.classList.toggle('active', button.dataset.screen === screen));
+        navItems.forEach(button => button.classList.toggle('active', button.dataset.go === screen));
+        title.textContent = copy[screen][0];
+        subtitle.textContent = copy[screen][1];
+      }
+
+      root.querySelectorAll('[data-platform]').forEach(button => {
+        button.addEventListener('click', () => {
+          root.querySelectorAll('[data-platform]').forEach(item => item.classList.remove('active'));
+          button.classList.add('active');
+          phone.classList.toggle('android', button.dataset.platform === 'android');
+          phone.classList.toggle('ios', button.dataset.platform === 'ios');
+        });
+      });
+
+      root.addEventListener('click', event => {
+        const goButton = event.target.closest('[data-go]');
+        if (goButton) setScreen(goButton.dataset.go);
+
+        const screenButton = event.target.closest('[data-screen]');
+        if (screenButton) setScreen(screenButton.dataset.screen);
+
+        const toastButton = event.target.closest('[data-toast]');
+        if (toastButton) showToast(toastButton.dataset.toast);
+
+        const mood = event.target.closest('.mood-row .chip');
+        if (mood) {
+          root.querySelectorAll('.mood-row .chip').forEach(item => item.classList.remove('active'));
+          mood.classList.add('active');
+          showToast(`Mood saved: ${mood.textContent}`);
+        }
+
+        const like = event.target.closest('[data-like]');
+        if (like) {
+          const likeCount = root.querySelector('#likeCount');
+          likeCount.textContent = like.textContent === 'Like' ? '25 likes' : '24 likes';
+          like.textContent = like.textContent === 'Like' ? 'Liked' : 'Like';
+        }
+
+        const qty = event.target.closest('[data-qty]');
+        if (qty) {
+          const output = root.querySelector('#cartQty');
+          const next = Math.max(1, Number(output.textContent) + Number(qty.dataset.qty));
+          output.textContent = next;
+        }
+      });
+
+      root.querySelector('[data-send-chat]').addEventListener('click', () => {
+        const input = root.querySelector('#chatInput');
+        const value = input.value.trim();
+        if (!value) return;
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble user';
+        bubble.textContent = value;
+        root.querySelector('#chatStream').appendChild(bubble);
+        input.value = '';
+        showToast('Message sent.');
+      });
+
+      root.querySelector('[data-add-idea]').addEventListener('click', () => {
+        const input = root.querySelector('#ideaText');
+        const value = input.value.trim();
+        if (!value) return;
+        const card = document.createElement('div');
+        card.className = 'post-card';
+        card.innerHTML = `<strong>New idea</strong><p>${value.replace(/[<>&"]/g, char => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[char]))}</p>`;
+        root.querySelector('#ideaList').prepend(card);
+        input.value = '';
+        showToast('Idea posted.');
+      });
+
+      root.querySelector('[data-create-room]').addEventListener('click', () => {
+        const input = root.querySelector('#roomName');
+        const value = input.value.trim();
+        if (!value) return;
+        const card = document.createElement('div');
+        card.className = 'room-card';
+        card.innerHTML = `<strong>${value.replace(/[<>&"]/g, char => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[char]))}</strong><p>Private room. 1 member.</p>`;
+        root.querySelector('#roomList').prepend(card);
+        input.value = '';
+        showToast('Room created.');
+      });
+    })();
+  </script>
+</div>
+</body>
+</html>
